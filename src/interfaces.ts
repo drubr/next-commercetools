@@ -10,3 +10,9 @@ export interface Product {
   images: string[];
   galleryImages: string[];
 }
+
+export interface Category {
+  id: number;
+  title: string;
+  fullPath: string;
+}

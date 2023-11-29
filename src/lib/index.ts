@@ -1,9 +1,10 @@
 import { promises as fs } from "fs";
-import { Product } from "@/interfaces";
+import { Category, Product } from "@/interfaces";
 import { formatProductTitle } from "@/helpers";
 
 export async function getData(): Promise<{
   products: Product[];
+  categories: Category[];
 }> {
   if (process.env.NODE_ENV === "development") {
     const res = await fs.readFile(process.cwd() + "/public/data.json", "utf8");
@@ -14,9 +15,25 @@ export async function getData(): Promise<{
   }
 }
 
-export async function getProducts(): Promise<Product[]> {
+export async function getProducts(
+  filter?: "category",
+  filterValue?: string,
+): Promise<Product[]> {
   const { products } = await getData();
-  return products;
+
+  if (filter === undefined || filterValue === undefined) {
+    return products;
+  }
+
+  switch (filter) {
+    case "category":
+      return products.filter(
+        (product) =>
+          product.category.toLowerCase() === filterValue.toLowerCase(),
+      );
+    default:
+      return products;
+  }
 }
 
 export async function getProduct(handle: string): Promise<Product | undefined> {
@@ -26,4 +43,9 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
       product.id.toString() === handle ||
       formatProductTitle(product.title) === formatProductTitle(handle),
   );
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const { categories } = await getData();
+  return categories;
 }
