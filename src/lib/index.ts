@@ -9,7 +9,7 @@ export async function getData(): Promise<{
     const res = await fs.readFile(process.cwd() + "/public/data.json", "utf8");
     return JSON.parse(res);
   } else {
-    const res = await fetch("https://next-commercetools.app/data.json");
+    const res = await fetch("https://next-commercetools.vercel.app/data.json");
     return res.json();
   }
 }
