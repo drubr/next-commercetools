@@ -4,6 +4,7 @@ import { ArrowLongLeftIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { getProduct } from "@/lib";
 import Loading from "@/app/product/[...handle]/loading";
+import AmazonPayAddToCart from "@/components/AmazonPayAddToCart";
 
 export default async function ProductPage({
   params,
@@ -11,9 +12,6 @@ export default async function ProductPage({
   params: { handle: string[] };
 }) {
   const product = await getProduct(params.handle[0]);
-
-  console.log(product);
-  console.log(params.handle[0]);
 
   if (product === undefined) return null;
 
@@ -47,6 +45,13 @@ export default async function ProductPage({
           <h1 className="text-2xl">Product `{product.title}`</h1>
 
           <div className="mt-4 grid gap-2">{product.description}</div>
+
+          <div className="mt-4 grid min-w-[12rem] gap-2">
+            <button className="w-full rounded-full border bg-white px-4 py-3 text-center transition hover:border-gray-300 hover:bg-gray-100">
+              Add to cart
+            </button>
+            <AmazonPayAddToCart />
+          </div>
         </div>
       </section>
     </Suspense>

@@ -16,7 +16,7 @@ export async function getData(): Promise<{
 }
 
 export async function getProducts(
-  filter?: "category",
+  filter?: "category" | "searchParams",
   filterValue?: string,
 ): Promise<Product[]> {
   const { products } = await getData();
