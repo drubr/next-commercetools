@@ -27,9 +27,16 @@
       ],
       "manufacturer": "Manufacturer Inc.",
       "fullPath": "/product/1",
-      "category": "Snowboarding",
+      "category": "Tech",
       "images": [],
       "galleryImages": []
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Tech",
+      "fullPath": "/category/tech"
     }
   ]
 }
